@@ -1,0 +1,35 @@
+Entidades Atualizadas:
+
+-- Inquilino:
+ID (identificador único)
+Nome
+Telefone
+E-mail
+Idade
+CPF
+
+-- Imovel:
+ID 
+Contrato
+Nome
+Número
+CEP
+Tamanho da Casa M2
+NumQuartos
+numBanheiros
+Área de Serviço
+Varanda
+Valor do Aluguel
+Pendencia financeira
+Data pagamento
+
+-- Pendências (Lista de notificações ou pendências relacionadas à casa)
+ID 
+Tipo de Notificação 
+Descrição da Notificação
+
+Relação:
+Inquilino e imovel: 1-1 total total
+Imovel e Pendencias: N:M parcial parcial
+
+
