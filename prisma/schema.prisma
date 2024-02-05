@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id String @id @default(cuid())
+  cpf String @unique
+  name String 
+  number String 
+  email String @unique
+  age String
+  immobile Immobile @relation(fields: [immobileId], references: [id])
+  immobileId String @unique
+  createdAt DateTime @default(now())
+}
+
+model Immobile {
+  id String @id @default(cuid())
+  cep String
+  contract String
+  numberHouse String
+  area Float
+  numberRooms Float
+  numberBathroom Float
+  serviceArea Boolean @default(false)
+  balcony Boolean @default(false)
+  rent Float
+  financialPending Boolean @default(false)
+  payday DateTime 
+  tenant Tenant?
+  pendency pendency[]
+  createdAt DateTime @default(now())
+}
+
+model pendency {
+  id String @id @default(cuid())
+  typeNotification String
+  description String
+  immobile Immobile[]
+}
+
+
