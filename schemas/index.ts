@@ -15,3 +15,15 @@ export const createHouseSchema = z.object({
     financialPending: z.boolean(),
     payday: z.date()
 })
+
+export const updateHouseSchema = z.object({
+    cep: z.string().optional(),
+    contract: z.string().optional(),
+    numberRooms: z.number().optional(),
+    numberBathroom: z.number().optional(),
+    serviceArea: z.boolean().optional(),
+    balcony: z.boolean().optional(),
+    rent: z.number().optional(),
+    financialPending: z.boolean().optional(),
+    payday: z.date().optional()
+})

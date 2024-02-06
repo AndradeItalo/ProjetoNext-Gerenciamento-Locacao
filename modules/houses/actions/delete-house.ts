@@ -1,12 +1,11 @@
 import { db as prisma } from "@/lib/db"
-import { Immobile } from "@prisma/client";
 
-const delHouse = async (immobile: Immobile) => {
+export const delHouse = async (id: string) => {
     try {
-        const deleteHouse = await prisma.immobile.delete({where: {id:immobile.id}});
-
+        const deleteHouse = await prisma.immobile.delete({where: {id: id}});
+        return {success: true, data: deleteHouse}
 
     } catch (error) {
-        return 
+        return "Con't find house"
     }
 }

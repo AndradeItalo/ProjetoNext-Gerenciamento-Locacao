@@ -1,8 +1,6 @@
 import { db as prisma } from "@/lib/db"
 import { createHouseSchema } from "@/schemas";
-import { Immobile } from "@prisma/client";
 import { z } from "zod";
-
 
 export const createHouse = async (
     values: z.infer<typeof createHouseSchema>
@@ -10,7 +8,7 @@ export const createHouse = async (
     const validatedFields = createHouseSchema.safeParse(values);
 
     if (!validatedFields.success) {
-      return { error: "Campos inválidos!" };
+      return { error: "Invalid fields!" };
     }
   
     const {cep, balcony, contract, financialPending, height, numberBathroom, numberHouse, numberRooms
@@ -18,14 +16,24 @@ export const createHouse = async (
       validatedFields.data;
 
       try {
-        const newHouse = await prisma.immobile.create({values});
+        const newHouse = await prisma.immobile.create({
+          cep,
+          balcony,
+          contract,
+          financialPending,
+          height,
+          numberBathroom,
+          numberHouse,
+          numberRooms,
+          payday,
+          rent,
+          serviceArea,
+          width,
+        });
+        
         return newHouse;
 
     } catch (error) {
         return "Error creating House";
     }
   }
-
-const addHouse = async () => {
-    
-}
