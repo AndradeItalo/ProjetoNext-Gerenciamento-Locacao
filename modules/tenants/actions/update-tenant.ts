@@ -1,15 +1,22 @@
 import { db as prisma } from "@/lib/db";
-import { Tenant } from "@prisma/client";
+import { updateTenantSchema } from "@/schemas";
+import { z } from "zod";
 
-export const updateTenant = async (id:string, tenantData:Tenant) =>{
+export const updateTenant = async (id: string, values: z.infer<typeof updateTenantSchema>) =>{
+    const validatedFields = updateTenantSchema.safeParse(values);
+
+    if (!validatedFields.success){
+        return {error: "Invalid fields!"}
+    }
+
     try {
-        await prisma.tenant.update({
+        const updatedTenant = await prisma.tenant.update({
             where: {id:id},
-            data: tenantData
-        })
+            data: validatedFields.data
+        });
 
+        return updatedTenant;
     } catch (error) {
-        console.log(error);
-        return error;
+        return "Error updating tenant"
     }
 } 

@@ -18,5 +18,4 @@ export const updateHouse = async (id: string, values: z.infer<typeof updateHouse
     } catch (error) {
         return "Error updating house"
     }
-
 };

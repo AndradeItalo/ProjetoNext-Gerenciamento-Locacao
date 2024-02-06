@@ -27,3 +27,17 @@ export const updateHouseSchema = z.object({
     financialPending: z.boolean().optional(),
     payday: z.date().optional()
 })
+
+export const createTenantSchema = z.object({
+    cpf: z.string().min(1, { message: "Por favor insira o CPF"}),
+    name: z.string().min(1, { message: "Por favor insira o nome"}),
+    number: z.string().min(1, {message: "Por favor insira o número"}),
+    email: z.string().min(1, {message: "Por favor insira o email"}),
+});
+
+export const updateTenantSchema = z.object({
+    cpf: z.string().optional(),
+    name: z.string().optional(),
+    number: z.string().optional(),
+    email: z.string().optional()
+})
